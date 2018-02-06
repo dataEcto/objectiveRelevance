@@ -1,53 +1,43 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class guardAI : MonoBehaviour {
 
     public Transform[] patrolPoints;
     public float speed;
     public float timer;
+   public bool timerStart;
+   public bool speedStop;
     
     Transform currentPatrolPoint;
-    Vector3 guardPosition;
     //A way to check the current patrol point our Guard is on
     int currentPatrolIndex;
     //For checking the array
-    bool isMoving;
+ 
 
 	// Use this for initialization
 	void Start () {
         currentPatrolIndex = 0;
         currentPatrolPoint = patrolPoints[currentPatrolIndex];
         timer = 10;
-        guardPosition = transform.position;
-        isMoving = true;
+        timerStart = false;
+        speedStop = false;
+      
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (isMoving == true)
-        {
+   
             transform.Translate(Vector3.up * Time.deltaTime * speed);
-        }
-
+       
         //Check to see if the Guard has reached the patrol point
         if (Vector3.Distance (transform.position, currentPatrolPoint.position) <= .1f )
         {
-            //Think backwards: this timer is in the wrong place, 
-            //because while the timer does go down, it only does down near a patrol point
-            //so we need it to stop at a point and then go down so it can move again
-            isMoving = false;
 
-            timer -= 1;
+            speedStop = true;
+            timerStart = true;
 
-            if (timer < 0)
-            {
-                timer = 10;
-                isMoving = true;
-            }
-           
+       
             //Now that we reached the next point, grab the next one.
             //We also need to check if we have any more patrol Points
             if (currentPatrolIndex + 1 < patrolPoints.Length)
@@ -61,6 +51,32 @@ public class guardAI : MonoBehaviour {
 
             currentPatrolPoint = patrolPoints[currentPatrolIndex];
 
+        }
+
+        
+
+        if (speedStop == true && timer >= 0)
+        {
+            speed = 0;
+        }
+
+        else
+        {
+            speed = 5;
+            speedStop = false;
+
+        }
+
+    
+        if (timerStart == true)
+        {
+            timer -= Time.deltaTime;
+
+        }
+        if (speed > 0)
+        {
+            timer = 10;
+            timerStart = false;
         }
 
         
