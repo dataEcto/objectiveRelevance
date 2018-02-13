@@ -43,21 +43,7 @@ public class guardAI : MonoBehaviour {
 
         //Check to see if the Guard has reached the patrol point
        
-        myRay = new Ray2D(transform.position, Vector2.down); //makes a ray cast downward
-        Debug.DrawRay(myRay.origin, myRay.direction * 5, Color.blue); //Shows the ray that you are casting
-        RaycastHit hit;
-        if (Physics.Raycast(myRay.origin, myRay.direction, out hit, 100))
-        {
-
-            print("Spotted");
-            test = true;
-
-        }
-
-        if (test == true)
-        {
-            transform.position = Vector3.Lerp(transform.position, snakePos.position, .1f);
-        }
+     
         if (Vector3.Distance (transform.position, currentPatrolPoint.position) <= .1f )
         {
 
