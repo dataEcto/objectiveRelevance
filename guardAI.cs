@@ -5,9 +5,15 @@ public class guardAI : MonoBehaviour {
     public Transform[] patrolPoints;
     public float speed;
     public float timer;
-   public bool timerStart;
-   public bool speedStop;
-    
+
+    public bool timerStart;
+    public bool speedStop;
+
+    public Ray2D myRay;
+    public Transform snakePos;
+
+    public bool test;
+
     Transform currentPatrolPoint;
     //A way to check the current patrol point our Guard is on
     int currentPatrolIndex;
@@ -21,16 +27,37 @@ public class guardAI : MonoBehaviour {
         timer = 10;
         timerStart = false;
         speedStop = false;
-      
+       
     }
 	
 	// Update is called once per frame
 	void Update () {
+        //Today we learned about Switch statements
+        //This could help
+    
 
-   
-            transform.Translate(Vector3.up * Time.deltaTime * speed);
-       
+        transform.Translate(Vector3.up * Time.deltaTime * speed);
+
+        //(vector a, vector b, speed);
+        // this will make the enemy follow Snake around!
+
         //Check to see if the Guard has reached the patrol point
+       
+        myRay = new Ray2D(transform.position, Vector2.down); //makes a ray cast downward
+        Debug.DrawRay(myRay.origin, myRay.direction * 5, Color.blue); //Shows the ray that you are casting
+        RaycastHit hit;
+        if (Physics.Raycast(myRay.origin, myRay.direction, out hit, 100))
+        {
+
+            print("Spotted");
+            test = true;
+
+        }
+
+        if (test == true)
+        {
+            transform.position = Vector3.Lerp(transform.position, snakePos.position, .1f);
+        }
         if (Vector3.Distance (transform.position, currentPatrolPoint.position) <= .1f )
         {
 
@@ -62,7 +89,7 @@ public class guardAI : MonoBehaviour {
 
         else
         {
-            speed = 5;
+            speed = 3;
             speedStop = false;
 
         }
@@ -73,9 +100,10 @@ public class guardAI : MonoBehaviour {
             timer -= Time.deltaTime;
 
         }
+
         if (speed > 0)
         {
-            timer = 10;
+            timer = 3;
             timerStart = false;
         }
 
@@ -90,6 +118,8 @@ public class guardAI : MonoBehaviour {
         //Apply this to the transform itself
         transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 180f);
 
-		
-	}
+
+        
+
+    }
 }
