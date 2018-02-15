@@ -11,11 +11,18 @@ public class fovScript : MonoBehaviour {
     public LayerMask targetMask;
     public LayerMask obstacleMask;
 
+    public float meshResolution; //The number of raycasts per degree
+
     public List<Transform> snake = new List<Transform>(); //Used for FindVisibleTargets. Actually, The tutorial is using multiple targets. I just dont know how to do one small one
 
     private void Start()
     {
         StartCoroutine("FindTargetsWithDelay", .2f);
+    }
+
+    private void Update()
+    {
+        //DrawFieldOfView();
     }
 
     //The CoRoutine
@@ -56,7 +63,20 @@ public class fovScript : MonoBehaviour {
         }
 
     }
+    
+  /*  void DrawFieldOfView()
+    {
+        float rayCount = Mathf.RoundToInt(viewAngle * meshResolution);  //Rounds up meshResolution 
+        float rayAngleSize = viewAngle / rayCount;
 
+        for (int i = 0; i <= rayCount; i++) //for every ray
+        {   
+            float angle =  viewAngle * 2 + rayAngleSize * i; //Our current angle will be this
+            Debug.DrawLine(transform.position, transform.position + DirFromAngle(angle, true) * viewRadius,Color.blue);
+        }
+
+    }
+  */
     //This method will take in the Angle, then return the direction of the angle
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal) 
     {
@@ -67,5 +87,6 @@ public class fovScript : MonoBehaviour {
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad), 0); //We don't need Z since we're working in 2D
 
     }
+
 }
 
