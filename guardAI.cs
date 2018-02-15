@@ -6,13 +6,12 @@ public class guardAI : MonoBehaviour {
     public float speed;
     public float timer;
 
-    public bool timerStart;
-    public bool speedStop;
+    bool timerStart;
+    bool speedStop;
 
-    public Ray2D myRay;
     public Transform snakePos;
-
-    public bool test;
+    public float awarenessRange;
+    public float distanceToTarget;
 
     Transform currentPatrolPoint;
     //A way to check the current patrol point our Guard is on
@@ -27,30 +26,46 @@ public class guardAI : MonoBehaviour {
         timer = 10;
         timerStart = false;
         speedStop = false;
-       
     }
 	
 	// Update is called once per frame
 	void Update () {
-        //Today we learned about Switch statements
-        //This could help
-    
 
         transform.Translate(Vector3.up * Time.deltaTime * speed);
+        //Check the distance to the player
+        distanceToTarget = Vector3.Distance(transform.position, snakePos.position);
+        //Check to see if the enemy is aware of the player - else, just patrol.
+        if (distanceToTarget > awarenessRange)
+        {
+            //The Patrol part
+            Patrol();
+        }
 
-        //(vector a, vector b, speed);
-        // this will make the enemy follow Snake around!
+        if (distanceToTarget < awarenessRange)
+        {
+            timer = 0;
+            speed = 1;
+            Chase();
+        }
 
-        //Check to see if the Guard has reached the patrol point
+
+
+        
        
-     
-        if (Vector3.Distance (transform.position, currentPatrolPoint.position) <= .1f )
+        
+        
+    }
+
+    void Patrol()
+    {
+        //Check to see if the Guard has reached the patrol point
+        if (Vector3.Distance(transform.position, currentPatrolPoint.position) <= .1f)
         {
 
             speedStop = true;
             timerStart = true;
 
-       
+
             //Now that we reached the next point, grab the next one.
             //We also need to check if we have any more patrol Points
             if (currentPatrolIndex + 1 < patrolPoints.Length)
@@ -66,7 +81,7 @@ public class guardAI : MonoBehaviour {
 
         }
 
-        
+
 
         if (speedStop == true && timer >= 0)
         {
@@ -80,7 +95,7 @@ public class guardAI : MonoBehaviour {
 
         }
 
-    
+
         if (timerStart == true)
         {
             timer -= Time.deltaTime;
@@ -93,19 +108,33 @@ public class guardAI : MonoBehaviour {
             timerStart = false;
         }
 
-        
+
         //Turning to face the next point
         Vector3 patrolPointDirection = currentPatrolPoint.position - transform.position;
         //Gives us radians (converted then to degrees) to change the angle
         float angle = Mathf.Atan2(patrolPointDirection.y, patrolPointDirection.x) * Mathf.Rad2Deg - 90f;
-
         //Allowing for rotations.
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         //Apply this to the transform itself
         transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 180f);
 
 
-        
+    }
+
+    void Chase()
+    {
+        //Chasing Player AI
+        //Could potentially use the fovScript for some parts instead of doing all this
+        //Chase the Player! - Turn and Move towards the target
+        Vector3 snakeDir = snakePos.position - transform.position;
+        float newAngle = Mathf.Atan2(snakeDir.y, snakeDir.x) * Mathf.Rad2Deg - 90f;
+        Quaternion q2 = Quaternion.AngleAxis(newAngle, Vector3.forward);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, q2, 180);
+        //GET IT MOVING!
+        transform.Translate(Vector3.up * Time.deltaTime * speed);
+
+
+       
 
     }
 }
