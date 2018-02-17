@@ -35,16 +35,16 @@ public class guardAI : MonoBehaviour {
         //Check the distance to the player
         distanceToTarget = Vector3.Distance(transform.position, snakePos.position);
         //Check to see if the enemy is aware of the player - else, just patrol.
-        if (distanceToTarget > awarenessRange)
+        if (gameObject.GetComponent<fovScript>().spotted == false)
         {
             //The Patrol part
             Patrol();
         }
 
-        if (distanceToTarget < awarenessRange)
+        if (gameObject.GetComponent<fovScript>().spotted == true)
         {
             timer = 0;
-            speed = 1;
+            speed = 2;
             Chase();
         }
 
