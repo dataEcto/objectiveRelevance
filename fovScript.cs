@@ -68,7 +68,7 @@ public class fovScript : MonoBehaviour {
                     snake.Add(target);
                     spotted = true;
                 }
-                else
+                else 
                     spotted = false;
             }
         }

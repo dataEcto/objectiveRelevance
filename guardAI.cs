@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class guardAI : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class guardAI : MonoBehaviour {
 
     bool timerStart;
     bool speedStop;
+    public bool musicPlay;
 
     public Transform snakePos;
     public float awarenessRange;
@@ -33,22 +35,31 @@ public class guardAI : MonoBehaviour {
 
         transform.Translate(Vector3.up * Time.deltaTime * speed);
         //Check the distance to the player
-        distanceToTarget = Vector3.Distance(transform.position, snakePos.position);
+      distanceToTarget = Vector3.Distance(transform.position, snakePos.position);
         //Check to see if the enemy is aware of the player - else, just patrol.
         if (gameObject.GetComponent<fovScript>().spotted == false)
         {
             //The Patrol part
             Patrol();
+            musicPlay = false;
         }
 
         if (gameObject.GetComponent<fovScript>().spotted == true)
         {
             timer = 0;
-            speed = 2;
+            speed = 3;
             Chase();
+            musicPlay = true;
+           
         }
-
-
+        /*
+         * 
+         *  if (distanceToTarget > awarenessRange)
+            {
+                Patrol();
+                musicPlay = false;
+            }
+        */
 
         
        
@@ -90,7 +101,7 @@ public class guardAI : MonoBehaviour {
 
         else
         {
-            speed = 3;
+            speed = 5;
             speedStop = false;
 
         }
@@ -106,17 +117,18 @@ public class guardAI : MonoBehaviour {
         {
             timer = 3;
             timerStart = false;
+            //Turning to face the next point
+            Vector3 patrolPointDirection = currentPatrolPoint.position - transform.position;
+            //Gives us radians (converted then to degrees) to change the angle
+            float angle = Mathf.Atan2(patrolPointDirection.y, patrolPointDirection.x) * Mathf.Rad2Deg - 90f;
+            //Allowing for rotations.
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+            //Apply this to the transform itself
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 180f);
+
         }
 
 
-        //Turning to face the next point
-        Vector3 patrolPointDirection = currentPatrolPoint.position - transform.position;
-        //Gives us radians (converted then to degrees) to change the angle
-        float angle = Mathf.Atan2(patrolPointDirection.y, patrolPointDirection.x) * Mathf.Rad2Deg - 90f;
-        //Allowing for rotations.
-        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-        //Apply this to the transform itself
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 180f);
 
 
     }
@@ -137,4 +149,13 @@ public class guardAI : MonoBehaviour {
        
 
     }
+
+    private void OnCollisionEnter2D(Collision2D collisionInfo)
+    {
+        if (collisionInfo.gameObject.tag == "Player")
+            SceneManager.LoadScene("gameOver");
+
+    }
+
+
 }
