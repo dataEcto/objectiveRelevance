@@ -39,6 +39,9 @@ public class snakeMovement : MonoBehaviour {
             snakeBody.velocity += new Vector2(-speed, 0);
         }
 
+        if (Input.GetKey("escape"))
+            Application.Quit();
+
     }
 
 

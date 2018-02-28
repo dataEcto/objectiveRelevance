@@ -75,7 +75,7 @@ public class fovScript : MonoBehaviour {
 
     }
 
-    void DrawFieldOfView()
+    void DrawFieldOfView() //A bit of a fancy way to draw the rays. It allows for real time changes of the visual cone (such as if it hits a wall)
     {
         float rayCount = Mathf.RoundToInt(viewAngle * meshResolution);  // Stores how many raycast are being made & Rounds up meshResolution 
         float rayAngleSize = viewAngle / rayCount;

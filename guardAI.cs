@@ -12,7 +12,8 @@ public class guardAI : MonoBehaviour {
     public bool musicPlay;
 
     public Transform snakePos;
-    public float awarenessRange;
+    //Vector3 snakeTransform;
+    public Vector3 awarenessRange;
     public float distanceToTarget;
 
     Transform currentPatrolPoint;
@@ -23,11 +24,13 @@ public class guardAI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
         currentPatrolIndex = 0;
         currentPatrolPoint = patrolPoints[currentPatrolIndex];
         timer = 10;
         timerStart = false;
         speedStop = false;
+        
     }
 	
 	// Update is called once per frame
@@ -35,7 +38,9 @@ public class guardAI : MonoBehaviour {
 
         transform.Translate(Vector3.up * Time.deltaTime * speed);
         //Check the distance to the player
-      distanceToTarget = Vector3.Distance(transform.position, snakePos.position);
+        distanceToTarget = Vector3.Distance(transform.position, snakePos.position);
+
+        //snakeTransform = new Vector3(snakePos.position.x, snakePos.position.y);
         //Check to see if the enemy is aware of the player - else, just patrol.
         if (gameObject.GetComponent<fovScript>().spotted == false)
         {
@@ -50,21 +55,28 @@ public class guardAI : MonoBehaviour {
             speed = 3;
             Chase();
             musicPlay = true;
-           
-        }
-        /*
-         * 
-         *  if (distanceToTarget > awarenessRange)
+
+            if (distanceToTarget > 30)
             {
                 Patrol();
                 musicPlay = false;
-            }
-        */
+                gameObject.GetComponent<fovScript>().spotted = false;
 
-        
-       
-        
-        
+            }
+
+           
+               
+            
+
+
+
+        }
+
+
+
+
+
+
     }
 
     void Patrol()
@@ -88,9 +100,18 @@ public class guardAI : MonoBehaviour {
                 currentPatrolIndex = 0;
             }
 
-            currentPatrolPoint = patrolPoints[currentPatrolIndex];
-
+           
         }
+
+        currentPatrolPoint = patrolPoints[currentPatrolIndex];
+        //Turning to face the next point
+        Vector3 patrolPointDirection = currentPatrolPoint.position - transform.position;
+        //Gives us radians (converted then to degrees) to change the angle
+        float angle = Mathf.Atan2(patrolPointDirection.y, patrolPointDirection.x) * Mathf.Rad2Deg - 90f;
+        //Allowing for rotations.
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        //Apply this to the transform itself
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 180f);
 
 
 
@@ -101,7 +122,7 @@ public class guardAI : MonoBehaviour {
 
         else
         {
-            speed = 5;
+            speed = 6;
             speedStop = false;
 
         }
@@ -117,14 +138,7 @@ public class guardAI : MonoBehaviour {
         {
             timer = 3;
             timerStart = false;
-            //Turning to face the next point
-            Vector3 patrolPointDirection = currentPatrolPoint.position - transform.position;
-            //Gives us radians (converted then to degrees) to change the angle
-            float angle = Mathf.Atan2(patrolPointDirection.y, patrolPointDirection.x) * Mathf.Rad2Deg - 90f;
-            //Allowing for rotations.
-            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-            //Apply this to the transform itself
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, q, 180f);
+            
 
         }
 
@@ -143,10 +157,11 @@ public class guardAI : MonoBehaviour {
         Quaternion q2 = Quaternion.AngleAxis(newAngle, Vector3.forward);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, q2, 180);
         //GET IT MOVING!
-        transform.Translate(Vector3.up * Time.deltaTime * speed);
+        transform.Translate(Vector3.up * Time.deltaTime * 7);
+     
 
 
-       
+
 
     }
 
@@ -154,6 +169,8 @@ public class guardAI : MonoBehaviour {
     {
         if (collisionInfo.gameObject.tag == "Player")
             SceneManager.LoadScene("gameOver");
+        if (collisionInfo.gameObject.tag == "enemy")
+            Physics2D.IgnoreCollision(collisionInfo.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 
     }
 
