@@ -1,0 +1,217 @@
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class guardAI : MonoBehaviour {
+
+    public Transform[] patrolPoints;
+    public float speed;
+    public float timer;
+    public float delay;
+
+    bool timerStart;
+    bool speedStop;
+    public bool musicPlay;
+
+    public Transform snakePos;
+    Animator anim;
+    public AudioClip alert;
+    AudioSource myAudio;
+    bool alreadyPlayed = false;
+
+
+    Transform currentPatrolPoint;
+    //A way to check the current patrol point our Guard is on
+    int currentPatrolIndex;
+    //For checking the array
+
+	// Use this for initialization
+	void Start () {
+
+        timer = 10;
+        delay = 1;
+
+        timerStart = false;
+        speedStop = false;
+
+        anim = GetComponent<Animator>();
+        myAudio = GetComponent<AudioSource>();
+
+        currentPatrolIndex = 0;
+        currentPatrolPoint = patrolPoints[currentPatrolIndex];
+
+
+        
+
+    }
+	
+	// Update is called once per frame
+	void Update () {
+
+        transform.Translate(Vector3.up * Time.deltaTime * speed);
+       
+    
+        //Check to see if the enemy is aware of the player - else, just patrol.
+        if (gameObject.GetComponent<fovScript>().spotted == false)
+        {
+            //The Patrol part
+            Patrol();
+  
+        }
+
+        if (gameObject.GetComponent<fovScript>().spotted == true)
+        {
+           
+            timer = 0;
+            speed = 0;
+            
+        
+            GameObject.Find("Snake").GetComponent<snakeMovement>().canMove = false;
+
+            delay -= Time.deltaTime;
+            if (!alreadyPlayed)
+            {
+                myAudio.PlayOneShot(alert, 1);
+                alreadyPlayed = true;
+            }
+            
+            if (delay <= 0)
+            {
+                SceneManager.LoadScene("gameOver");
+            }
+
+
+
+        }
+
+        if (anim != null)
+        {
+
+            if (anim.runtimeAnimatorController != null)
+            {
+                if (transform.rotation.z >= -180 && transform.rotation.z <= - 170)
+                {
+                    anim.SetBool("down", true);
+                    anim.SetBool("right", false);
+                    anim.SetBool("up", false);
+                    anim.SetBool("left", false);
+                    //anim.Play("patrolDown");
+
+                }
+
+                if (transform.rotation.z < 0 && transform.rotation.z >= -90)
+                {
+                    anim.SetBool("down", false);
+                    anim.SetBool("right", true);
+                    anim.SetBool("up", false);
+                    anim.SetBool("left", false);
+                    //anim.Play("patrolRight");
+                }
+
+                if (transform.rotation.z > 0 && transform.rotation.z <= 1) 
+                {
+                    anim.SetBool("down", false);
+                    anim.SetBool("right", false);
+                    anim.SetBool("up", true);
+                    anim.SetBool("left", false);
+                    //anim.Play("patrolUp");
+                }
+
+                if (transform.rotation.z >= 89 && transform.rotation.z <= 91)
+                {
+                    anim.SetBool("down", false);
+                    anim.SetBool("right", false);
+                    anim.SetBool("up", false);
+                    anim.SetBool("left", true);
+                    //anim.Play("patrolLeft");
+                }
+            }
+
+              
+        }
+       
+       
+    }
+
+    void Patrol()
+    {
+        //Check to see if the Guard has reached the patrol point
+        if (Vector3.Distance(transform.position, currentPatrolPoint.position) <= .1f)
+        {
+
+            speedStop = true;
+            timerStart = true;
+
+            //Now that we reached the next point, grab the next one.
+            //We also need to check if we have any more patrol Points
+            if (currentPatrolIndex + 1 < patrolPoints.Length)
+            {
+                currentPatrolIndex++;
+            }
+            else
+            {
+                currentPatrolIndex = 0;
+            }
+
+           
+        }
+
+        currentPatrolPoint = patrolPoints[currentPatrolIndex];
+        //Turning to face the next point
+        Vector3 patrolPointDirection = currentPatrolPoint.position - transform.position;
+        //Gives us radians (converted then to degrees) to change the angle
+        float angle = Mathf.Atan2(patrolPointDirection.y, patrolPointDirection.x) * Mathf.Rad2Deg - 90f;
+        //Allowing for rotations.
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+        //Apply this to the transform itself. Time.delta time allows it to rotate slower, avoiding the weird glitchiness of it spazzing out basically
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, q , 180 *Time.deltaTime); 
+
+        ///IMPORTANT!! Do not start a guard ON TOP of a patrol point, or else it will start spinning forever! Put it as far away as possible!!
+
+
+
+        if (speedStop == true && timer >= 0)
+            speed = 0;
+        
+        else
+        {
+            speed = 5;
+            speedStop = false;
+        }
+
+
+        if (timerStart == true)
+        
+            timer -= Time.deltaTime;
+        
+
+        if (speed > 0)
+        {
+            timer = 3;
+            timerStart = false;
+        }
+
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collisionInfo)
+    {
+        if (collisionInfo.gameObject.tag == "Player")
+        {
+            speed = 0;
+            Vector3 snakeDirection = transform.position - snakePos.position;
+            //Gives us radians (converted then to degrees) to change the angle
+            float angleTwo = Mathf.Atan2(snakeDirection.y, snakeDirection.x) * Mathf.Rad2Deg - 90f;
+            //Allowing for rotations.
+            Quaternion qTwo = Quaternion.AngleAxis(angleTwo, Vector3.forward);
+            //Apply this to the transform itself. Time.delta time allows it to rotate slower, avoiding the weird glitchiness of it spazzing out basically
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, qTwo, 180 * Time.deltaTime);
+
+        }
+           
+        //So that enemies can pass through each other
+        if (collisionInfo.gameObject.tag == "enemy")
+            Physics2D.IgnoreCollision(collisionInfo.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+    }
+
+
+}
