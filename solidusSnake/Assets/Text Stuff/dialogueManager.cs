@@ -9,6 +9,8 @@ public class dialogueManager : MonoBehaviour {
     public Text nameText;
     public Text dialogueText;
 
+    public Animator animator;
+
     private Queue<string> sentences;
 
     //Think: John's Sylladex from Homestuck
@@ -22,6 +24,7 @@ public class dialogueManager : MonoBehaviour {
 
     public void startDialogue(dialogue dialogue)
     {
+        animator.SetBool("isOpen", true);
         nameText.text = dialogue.name;
 
         sentences.Clear();
@@ -43,13 +46,24 @@ public class dialogueManager : MonoBehaviour {
         }
 
         string sentence = sentences.Dequeue();
-        dialogueText.text = sentence;
+        StopAllCoroutines();
+        StartCoroutine(typeSentence(sentence));
 
+    }
+
+    IEnumerator typeSentence (string sentence)
+    {
+        dialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
+            {
+                dialogueText.text += letter;
+                yield return null;
+            }
     }
 
     void endDialogue()
     {
-        Debug.Log("end");
+        animator.SetBool("isOpen", false);
     }
   
 }
