@@ -7,19 +7,15 @@ public class guardAI : MonoBehaviour {
     public float speed;
     public float timer;
     public float delay;
-   
 
     bool timerStart;
     bool speedStop;
-    
+    public bool musicPlay;
 
     public Transform snakePos;
     Animator anim;
     public AudioClip alert;
-    public AudioClip walking;
     AudioSource myAudio;
-   
-
     bool alreadyPlayed = false;
 
 
@@ -28,18 +24,17 @@ public class guardAI : MonoBehaviour {
     int currentPatrolIndex;
     //For checking the array
 
+	// Use this for initialization
 	void Start () {
 
         timer = 10;
         delay = 1;
-       
 
         timerStart = false;
         speedStop = false;
 
         anim = GetComponent<Animator>();
         myAudio = GetComponent<AudioSource>();
-        myAudio.clip = walking;
 
         currentPatrolIndex = 0;
         currentPatrolPoint = patrolPoints[currentPatrolIndex];
@@ -49,24 +44,21 @@ public class guardAI : MonoBehaviour {
 
     }
 	
+	// Update is called once per frame
 	void Update () {
 
-       
         transform.Translate(Vector3.up * Time.deltaTime * speed);
-       if (speed > 0)
-        {
-            myAudio.PlayOneShot(walking,1);
-        }
+       
     
         //Check to see if the enemy is aware of the player - else, just patrol.
-        if (GameObject.Find("Guard").GetComponent<fovScript>().spotted == false)
+        if (gameObject.GetComponent<fovScript>().spotted == false)
         {
             //The Patrol part
             Patrol();
   
         }
 
-        if ((GameObject.Find("Guard").GetComponent<fovScript>().spotted == true))
+        if (gameObject.GetComponent<fovScript>().spotted == true)
         {
            
             timer = 0;
@@ -76,10 +68,8 @@ public class guardAI : MonoBehaviour {
             GameObject.Find("Snake").GetComponent<snakeMovement>().canMove = false;
 
             delay -= Time.deltaTime;
-
-            if (!alreadyPlayed && myAudio.clip == walking)
+            if (!alreadyPlayed)
             {
-                myAudio.clip = alert;
                 myAudio.PlayOneShot(alert, 1);
                 alreadyPlayed = true;
             }
@@ -93,7 +83,51 @@ public class guardAI : MonoBehaviour {
 
         }
 
-       
+        if (anim != null)
+        {
+
+            if (anim.runtimeAnimatorController != null)
+            {
+                if (transform.rotation.z >= -180 && transform.rotation.z <= - 170)
+                {
+                    anim.SetBool("down", true);
+                    anim.SetBool("right", false);
+                    anim.SetBool("up", false);
+                    anim.SetBool("left", false);
+                    //anim.Play("patrolDown");
+
+                }
+
+                if (transform.rotation.z < 0 && transform.rotation.z >= -90)
+                {
+                    anim.SetBool("down", false);
+                    anim.SetBool("right", true);
+                    anim.SetBool("up", false);
+                    anim.SetBool("left", false);
+                    //anim.Play("patrolRight");
+                }
+
+                if (transform.rotation.z > 0 && transform.rotation.z <= 1) 
+                {
+                    anim.SetBool("down", false);
+                    anim.SetBool("right", false);
+                    anim.SetBool("up", true);
+                    anim.SetBool("left", false);
+                    //anim.Play("patrolUp");
+                }
+
+                if (transform.rotation.z >= 89 && transform.rotation.z <= 91)
+                {
+                    anim.SetBool("down", false);
+                    anim.SetBool("right", false);
+                    anim.SetBool("up", false);
+                    anim.SetBool("left", true);
+                    //anim.Play("patrolLeft");
+                }
+            }
+
+              
+        }
        
        
     }
@@ -129,7 +163,7 @@ public class guardAI : MonoBehaviour {
         //Allowing for rotations.
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         //Apply this to the transform itself. Time.delta time allows it to rotate slower, avoiding the weird glitchiness of it spazzing out basically
-         transform.rotation = Quaternion.RotateTowards(transform.rotation, q , 180 *Time.deltaTime); 
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, q , 180 *Time.deltaTime); 
 
         ///IMPORTANT!! Do not start a guard ON TOP of a patrol point, or else it will start spinning forever! Put it as far away as possible!!
 
@@ -154,52 +188,6 @@ public class guardAI : MonoBehaviour {
         {
             timer = 3;
             timerStart = false;
-        }
-
-        if (anim != null)
-        {
-
-            if (anim.runtimeAnimatorController != null)
-            {
-                if (transform.rotation.z >= -180 && transform.rotation.z <= -170)
-                {
-                    anim.SetBool("down", true);
-                    anim.SetBool("right", false);
-                    anim.SetBool("up", false);
-                    anim.SetBool("left", false);
-                    //anim.Play("patrolDown");
-
-                }
-
-                if (transform.rotation.z < 0 && transform.rotation.z >= -90)
-                {
-                    anim.SetBool("down", false);
-                    anim.SetBool("right", true);
-                    anim.SetBool("up", false);
-                    anim.SetBool("left", false);
-                    //anim.Play("patrolRight");
-                }
-
-                if (transform.rotation.z > 0 && transform.rotation.z <= 1)
-                {
-                    anim.SetBool("down", false);
-                    anim.SetBool("right", false);
-                    anim.SetBool("up", true);
-                    anim.SetBool("left", false);
-                    //anim.Play("patrolUp");
-                }
-
-                if (transform.rotation.z >= 89 && transform.rotation.z <= 91)
-                {
-                    anim.SetBool("down", false);
-                    anim.SetBool("right", false);
-                    anim.SetBool("up", false);
-                    anim.SetBool("left", true);
-                    //anim.Play("patrolLeft");
-                }
-            }
-
-
         }
 
     }
