@@ -6,11 +6,6 @@ public class dialogueTrigger : MonoBehaviour {
 
     public dialogue dialogue;
 
-    private void Start()
-    {
-        triggerDialogue();
-    }
-
     public void triggerDialogue()
     {
         FindObjectOfType<dialogueManager>().startDialogue(dialogue);
