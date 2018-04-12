@@ -140,7 +140,7 @@ public class guardAI : MonoBehaviour {
         
         else
         {
-            speed = 5;
+            speed = 1.5f;
             speedStop = false;
         }
 
