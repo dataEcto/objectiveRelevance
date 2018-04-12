@@ -31,13 +31,17 @@ public class guardAI : MonoBehaviour {
 	void Start () {
 
         timer = 10;
+<<<<<<< Updated upstream:solidusSnake/Assets/Robots/guardAI.cs
         delay = 1;
        
+=======
+        delay = 2;
+>>>>>>> Stashed changes:solidusSnake/Assets/guardAI.cs
 
         timerStart = false;
         speedStop = false;
 
-        anim = GetComponent<Animator>();
+        anim = transform.Find("GuardSprite").GetComponent<Animator>();
         myAudio = GetComponent<AudioSource>();
         myAudio.clip = walking;
 
@@ -71,13 +75,16 @@ public class guardAI : MonoBehaviour {
            
             timer = 0;
             speed = 0;
-            
-        
-            GameObject.Find("Snake").GetComponent<snakeMovement>().canMove = false;
 
             delay -= Time.deltaTime;
 
+<<<<<<< Updated upstream:solidusSnake/Assets/Robots/guardAI.cs
             if (!alreadyPlayed && myAudio.clip == walking)
+=======
+            GameObject.Find("Snake").GetComponent<snakeMovement>().canMove = false;
+
+            if (!alreadyPlayed)
+>>>>>>> Stashed changes:solidusSnake/Assets/guardAI.cs
             {
                 myAudio.clip = alert;
                 myAudio.PlayOneShot(alert, 1);
@@ -93,7 +100,55 @@ public class guardAI : MonoBehaviour {
 
         }
 
+<<<<<<< Updated upstream:solidusSnake/Assets/Robots/guardAI.cs
        
+=======
+        if (anim != null)
+        {
+
+            if (anim.runtimeAnimatorController != null)
+            {
+                if (transform.rotation.z >= -180 && transform.rotation.z <= - 170)
+                {
+                    anim.SetBool("down", true);
+                    anim.SetBool("right", false);
+                    anim.SetBool("up", false);
+                    anim.SetBool("left", false);
+                    //anim.Play("patrolDown");
+
+                }
+
+                if (transform.rotation.z < 0 && transform.rotation.z >= -90)
+                {
+                    anim.SetBool("down", false);
+                    anim.SetBool("right", false);
+                    anim.SetBool("up", true);
+                    anim.SetBool("left", false);
+                    //anim.Play("patrolRight");
+                }
+
+                if (transform.rotation.z > 0 && transform.rotation.z <= 1) 
+                {
+                    anim.SetBool("down", false);
+                    anim.SetBool("right", false);
+                    anim.SetBool("up", true);
+                    anim.SetBool("left", false);
+                    //anim.Play("patrolUp");
+                }
+
+                if (transform.rotation.z >= 89 && transform.rotation.z <= 91)
+                {
+                    anim.SetBool("down", false);
+                    anim.SetBool("right", false);
+                    anim.SetBool("up", true);
+                    anim.SetBool("left", false);
+                    //anim.Play("patrolLeft");
+                }
+            }
+
+              
+        }
+>>>>>>> Stashed changes:solidusSnake/Assets/guardAI.cs
        
        
     }
@@ -224,6 +279,4 @@ public class guardAI : MonoBehaviour {
         if (collisionInfo.gameObject.tag == "enemy")
             Physics2D.IgnoreCollision(collisionInfo.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
-
-
 }
