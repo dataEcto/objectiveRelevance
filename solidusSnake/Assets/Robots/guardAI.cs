@@ -31,13 +31,10 @@ public class guardAI : MonoBehaviour {
 	void Start () {
 
         timer = 10;
-<<<<<<< Updated upstream:solidusSnake/Assets/Robots/guardAI.cs
         delay = 1;
        
-=======
         delay = 2;
->>>>>>> Stashed changes:solidusSnake/Assets/guardAI.cs
-
+        
         timerStart = false;
         speedStop = false;
 
@@ -78,13 +75,13 @@ public class guardAI : MonoBehaviour {
 
             delay -= Time.deltaTime;
 
-<<<<<<< Updated upstream:solidusSnake/Assets/Robots/guardAI.cs
+
             if (!alreadyPlayed && myAudio.clip == walking)
-=======
+
             GameObject.Find("Snake").GetComponent<snakeMovement>().canMove = false;
 
             if (!alreadyPlayed)
->>>>>>> Stashed changes:solidusSnake/Assets/guardAI.cs
+
             {
                 myAudio.clip = alert;
                 myAudio.PlayOneShot(alert, 1);
@@ -100,9 +97,7 @@ public class guardAI : MonoBehaviour {
 
         }
 
-<<<<<<< Updated upstream:solidusSnake/Assets/Robots/guardAI.cs
-       
-=======
+
         if (anim != null)
         {
 
@@ -148,7 +143,7 @@ public class guardAI : MonoBehaviour {
 
               
         }
->>>>>>> Stashed changes:solidusSnake/Assets/guardAI.cs
+
        
        
     }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class lucySpotted : MonoBehaviour
 {
-    /*
     public float yPos;
     public float timer = 0;
     public bool timerOn;
@@ -25,23 +24,26 @@ public class lucySpotted : MonoBehaviour
     {
         if (GameObject.Find("Guard").GetComponent<fovScript>().spotted == true || spotted)
         {
+            /*
             if(timer < 1)
             {
                 timerOn
             }
-            timer += Time.deltaTime / 0.5f;
+            */
+            ///timer += Time.deltaTime / 0.5f;
             GetComponent<ParticleSystem>().Play();
-            yPos = Mathf.Lerp(a, b, timer);
+            //yPos = Mathf.Lerp(a, b, timer);
             
-            transform.position = new Vector3(transform.position.x, transform.position.y + yPos, transform.position.z);
+            //transform.position = new Vector3(transform.position.x, transform.position.y + yPos, transform.position.z);
         }
+        /*
         else
         {
             timer = 0;
         }
-
+        */
     }
-    */
+
 }
 
  
