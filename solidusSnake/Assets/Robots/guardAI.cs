@@ -259,7 +259,7 @@ public class guardAI : MonoBehaviour {
     {
         if (collisionInfo.gameObject.tag == "Player")
         {
-            speed = 0;
+            
             Vector3 snakeDirection = transform.position - snakePos.position;
             //Gives us radians (converted then to degrees) to change the angle
             float angleTwo = Mathf.Atan2(snakeDirection.y, snakeDirection.x) * Mathf.Rad2Deg - 90f;
@@ -267,6 +267,7 @@ public class guardAI : MonoBehaviour {
             Quaternion qTwo = Quaternion.AngleAxis(angleTwo, Vector3.forward);
             //Apply this to the transform itself. Time.delta time allows it to rotate slower, avoiding the weird glitchiness of it spazzing out basically
             transform.rotation = Quaternion.RotateTowards(transform.rotation, qTwo, 180 * Time.deltaTime);
+            speed = 0;
 
         }
            
