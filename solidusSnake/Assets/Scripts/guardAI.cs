@@ -4,16 +4,15 @@ using UnityEngine.SceneManagement;
 public class guardAI : MonoBehaviour {
 
     public Transform[] patrolPoints;
-    public float speed;
-    public float timer;
-    public float delay;
+    float speed;
+    float timer;
+    float delay;
    
 
     bool timerStart;
     bool speedStop;
     
 
-    public Transform snakePos;
     Animator anim;
     public AudioClip alert;
     public AudioClip walking;
@@ -30,7 +29,7 @@ public class guardAI : MonoBehaviour {
 
 	void Start () {
 
-        timer = 10;
+        timer = 3;
         delay = 1;
        
         delay = 2;
@@ -190,7 +189,7 @@ public class guardAI : MonoBehaviour {
         
         else
         {
-            speed = 5;
+            speed = 3;
             speedStop = false;
         }
 
@@ -206,51 +205,7 @@ public class guardAI : MonoBehaviour {
             timerStart = false;
         }
 
-        if (anim != null)
-        {
-
-            if (anim.runtimeAnimatorController != null)
-            {
-                if (transform.rotation.z >= -180 && transform.rotation.z <= -170)
-                {
-                    anim.SetBool("down", true);
-                    anim.SetBool("right", false);
-                    anim.SetBool("up", false);
-                    anim.SetBool("left", false);
-                    //anim.Play("patrolDown");
-
-                }
-
-                if (transform.rotation.z < 0 && transform.rotation.z >= -90)
-                {
-                    anim.SetBool("down", false);
-                    anim.SetBool("right", true);
-                    anim.SetBool("up", false);
-                    anim.SetBool("left", false);
-                    //anim.Play("patrolRight");
-                }
-
-                if (transform.rotation.z > 0 && transform.rotation.z <= 1)
-                {
-                    anim.SetBool("down", false);
-                    anim.SetBool("right", false);
-                    anim.SetBool("up", true);
-                    anim.SetBool("left", false);
-                    //anim.Play("patrolUp");
-                }
-
-                if (transform.rotation.z >= 89 && transform.rotation.z <= 91)
-                {
-                    anim.SetBool("down", false);
-                    anim.SetBool("right", false);
-                    anim.SetBool("up", false);
-                    anim.SetBool("left", true);
-                    //anim.Play("patrolLeft");
-                }
-            }
-
-
-        }
+       
 
     }
 
@@ -260,13 +215,7 @@ public class guardAI : MonoBehaviour {
         if (collisionInfo.gameObject.tag == "Player")
         {
             
-            Vector3 snakeDirection = transform.position - snakePos.position;
-            //Gives us radians (converted then to degrees) to change the angle
-            float angleTwo = Mathf.Atan2(snakeDirection.y, snakeDirection.x) * Mathf.Rad2Deg - 90f;
-            //Allowing for rotations.
-            Quaternion qTwo = Quaternion.AngleAxis(angleTwo, Vector3.forward);
-            //Apply this to the transform itself. Time.delta time allows it to rotate slower, avoiding the weird glitchiness of it spazzing out basically
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, qTwo, 180 * Time.deltaTime);
+         
             speed = 0;
 
         }
