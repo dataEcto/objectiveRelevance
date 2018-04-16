@@ -25,9 +25,9 @@ public class dialogueManager : MonoBehaviour {
 
     public void startDialogue(dialogue dialogue)
     {
-        //animator.SetBool("isOpen", true);
+       
         nameText.text = dialogue.name;
-
+        Debug.Log("convo");
         sentences.Clear();
 
         foreach (string sentence in dialogue.sentences)

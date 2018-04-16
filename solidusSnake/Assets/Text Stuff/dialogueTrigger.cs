@@ -8,7 +8,7 @@ public class dialogueTrigger : MonoBehaviour {
 
     public void Start ()
     {
-        triggerDialogue();
+        FindObjectOfType<dialogueManager>().startDialogue(dialogue);
     }
     public void triggerDialogue()
     {

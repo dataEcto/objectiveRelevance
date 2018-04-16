@@ -15,7 +15,7 @@ public class sceneManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("debug");
+            SceneManager.LoadScene("debug 1");
         }
 
         if (Input.GetKey("escape"))

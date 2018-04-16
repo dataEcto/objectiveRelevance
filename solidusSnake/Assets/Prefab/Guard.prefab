@@ -496,6 +496,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  speed: 0
   alert: {fileID: 8300000, guid: d79924b716eda654581c6df670995f99, type: 3}
   walking: {fileID: 8300000, guid: 63011cd6995a2754b88af43e63341b93, type: 3}
 --- !u!114 &114675172626679602
