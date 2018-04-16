@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class guardAI : MonoBehaviour {
 
     public Transform[] patrolPoints;
-    float speed;
+    public float speed;
     float timer;
     float delay;
    
@@ -57,14 +57,14 @@ public class guardAI : MonoBehaviour {
         }
     
         //Check to see if the enemy is aware of the player - else, just patrol.
-        if (GameObject.Find("Guard").GetComponent<fovScript>().spotted == false)
+        if (GetComponent<fovScript>().spotted == false)
         {
             //The Patrol part
             Patrol();
   
         }
 
-        if ((GameObject.Find("Guard").GetComponent<fovScript>().spotted == true))
+        if (GetComponent<fovScript>().spotted == true)
         {
            
             timer = 0;

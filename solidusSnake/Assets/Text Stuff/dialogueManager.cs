@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class dialogueManager : MonoBehaviour {
@@ -9,7 +10,7 @@ public class dialogueManager : MonoBehaviour {
     public Text nameText;
     public Text dialogueText;
 
-    public Animator animator;
+    //public Animator animator;
 
     private Queue<string> sentences;
 
@@ -24,7 +25,7 @@ public class dialogueManager : MonoBehaviour {
 
     public void startDialogue(dialogue dialogue)
     {
-        animator.SetBool("isOpen", true);
+        //animator.SetBool("isOpen", true);
         nameText.text = dialogue.name;
 
         sentences.Clear();
@@ -63,7 +64,9 @@ public class dialogueManager : MonoBehaviour {
 
     void endDialogue()
     {
-        animator.SetBool("isOpen", false);
+        SceneManager.LoadScene("debug 1");
+
+       // animator.SetBool("isOpen", false);
     }
   
 }

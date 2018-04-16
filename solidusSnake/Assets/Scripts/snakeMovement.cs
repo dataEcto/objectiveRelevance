@@ -80,7 +80,7 @@ public class snakeMovement : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collisionInfo)
     {
-        if (collisionInfo.gameObject.tag == "Finish")
+        if (collisionInfo.gameObject.tag == "goal")
             SceneManager.LoadScene("win");
 
         if (collisionInfo.gameObject.tag == "enemy")
@@ -88,6 +88,10 @@ public class snakeMovement : MonoBehaviour {
                 SceneManager.LoadScene("gameOver");
         }
            
+        if (collisionInfo.gameObject.tag == "tutorial end")
+        {
+            SceneManager.LoadScene("textDebug");
+        }
 
     }
 
