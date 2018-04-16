@@ -6,17 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/instructions.unity
-    guid: 0c1c2f36e0d221d4f9bd7a66f5656425
+    path: Assets/debug.unity
+    guid: bcf1af45f3fe26d45a33d93be5a40bf9
   - enabled: 1
-    path: Assets/Text Stuff/textDebug.unity
-    guid: 1789666b13b863f41af00736f3d714a9
-  - enabled: 1
-    path: Assets/Scenes/debug 1.unity
-    guid: 0cefc20c82a96414fa5b01607358c6c3
-  - enabled: 1
-    path: Assets/Scenes/gameOver.unity
+    path: Assets/gameOver.unity
     guid: 21ea5c6dee47bda458a8204afa668466
   - enabled: 1
-    path: Assets/Scenes/win.unity
-    guid: 0a1d44e1c76c8604d9ddeb831b89634d
+    path: Assets/instructions.unity
+    guid: 0c1c2f36e0d221d4f9bd7a66f5656425
