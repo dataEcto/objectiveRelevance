@@ -10,18 +10,12 @@ public class dialogueManager : MonoBehaviour {
     public Text nameText;
     public Text dialogueText;
 
-    //public Animator animator;
+    public Animator animator;
 
+    float delay = 1;
     private Queue<string> sentences;
-
     //Think: John's Sylladex from Homestuck
 
-    // Use this for initialization
-    void Start() {
-
-       
-
-    }
 
     private void Awake()
     {
@@ -30,7 +24,7 @@ public class dialogueManager : MonoBehaviour {
 
     public void startDialogue(dialogue dialogue)
     {
-       
+        animator.SetBool("isOpen", true);
         nameText.text = dialogue.name;
         Debug.Log("convo");
         sentences.Clear();
@@ -69,9 +63,11 @@ public class dialogueManager : MonoBehaviour {
 
     void endDialogue()
     {
+      
+        animator.SetBool("isOpen", false);
         SceneManager.LoadScene("debug 1");
-
-       // animator.SetBool("isOpen", false);
     }
+
   
+
 }
