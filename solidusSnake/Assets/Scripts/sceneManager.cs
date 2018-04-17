@@ -13,12 +13,14 @@ public class sceneManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneManager.LoadScene("debug 1");
-        }
+       
 
         if (Input.GetKey("escape"))
             Application.Quit();
+    }
+
+    public void loadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

@@ -90,7 +90,7 @@ public class snakeMovement : MonoBehaviour {
            
         if (collisionInfo.gameObject.tag == "tutorial end")
         {
-            SceneManager.LoadScene("textDebug");
+            SceneManager.LoadScene("introText");
         }
 
     }

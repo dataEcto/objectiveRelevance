@@ -192,7 +192,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &179439184
 GameObject:
@@ -283,7 +283,7 @@ Prefab:
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.size
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 224293549616514608, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
@@ -323,7 +323,7 @@ Prefab:
     - target: {fileID: 224293549616514608, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224293549616514608, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
@@ -378,39 +378,36 @@ Prefab:
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: Good job clearing that one.
+      value: You're pretty good.
       objectReference: {fileID: 0}
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.data[1]
-      value: Not much else to say, besides to get ready for the next one. Lets see...
+      value: The boss is going to be happy about this one.
       objectReference: {fileID: 0}
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.data[2]
-      value: 'Level 2:
-
-        Hallways.
-
-        These hallways can get confined quick.
-
-        Stay patient, but be swift.'
+      value: "Although, sometimes I \ncan't tell with the guy."
       objectReference: {fileID: 0}
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.data[3]
-      value: 'So...have fun, okay? '
+      value: 'He''s very aloof, and sometimes
+
+        doesn''t seem interested in things.'
       objectReference: {fileID: 0}
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.data[4]
-      value: "I know the boss is monitoring you, \nbut think of this as just a fun
-        exercise. "
+      value: 'And he''s your brother too,
+
+        yet he doens''t seem to care what happens to you.'
       objectReference: {fileID: 0}
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.data[5]
-      value: Just get ready.
+      value: What am I saying...Lets get ready for the next level.
       objectReference: {fileID: 0}
     - target: {fileID: 114113035432501412, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
@@ -436,6 +433,15 @@ Prefab:
         type: 2}
       propertyPath: m_AnchoredPosition.x
       value: -7.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
+        type: 2}
+      propertyPath: dialogue.sentences.Array.data[6]
+      value: 'Level 3
+
+        Spherical.
+
+'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25f6cc28857e48943a9835817e3e0293, type: 2}
@@ -500,45 +506,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1545391233
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1545391235}
-  - component: {fileID: 1545391234}
-  m_Layer: 0
-  m_Name: Scene Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1545391234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1545391233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc53224de354a50499c6018df3822b30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1545391235
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1545391233}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
