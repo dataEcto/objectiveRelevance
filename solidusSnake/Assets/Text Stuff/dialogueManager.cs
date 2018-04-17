@@ -19,8 +19,13 @@ public class dialogueManager : MonoBehaviour {
     // Use this for initialization
     void Start() {
 
-        sentences = new Queue<string>();
+       
 
+    }
+
+    private void Awake()
+    {
+        sentences = new Queue<string>();
     }
 
     public void startDialogue(dialogue dialogue)
