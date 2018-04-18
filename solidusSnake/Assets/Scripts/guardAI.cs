@@ -19,7 +19,7 @@ public class guardAI : MonoBehaviour {
     AudioSource myAudio;
    
 
-    bool alreadyPlayed = false;
+    bool alreadyPlayed = true;
 
 
     Transform currentPatrolPoint;
@@ -45,25 +45,21 @@ public class guardAI : MonoBehaviour {
         currentPatrolPoint = patrolPoints[currentPatrolIndex];
 
 
-        
-
     }
 	
 	void Update () {
 
        
-        transform.Translate(Vector3.up * Time.deltaTime * speed);
-       if (speed > 0)
-        {
-            myAudio.PlayOneShot(walking,1);
-        }
-    
+       transform.Translate(Vector3.up * Time.deltaTime * speed);
+
+       
         //Check to see if the enemy is aware of the player - else, just patrol.
         if (GetComponent<fovScript>().spotted == false)
         {
             //The Patrol part
             Patrol();
-  
+            playAudio();
+
         }
 
         if (GetComponent<fovScript>().spotted == true)
@@ -74,18 +70,8 @@ public class guardAI : MonoBehaviour {
 
             delay -= Time.deltaTime;
 
-
-            if (!alreadyPlayed && myAudio.clip == walking)
-
             GameObject.Find("Snake").GetComponent<snakeMovement>().canMove = false;
 
-            if (!alreadyPlayed)
-
-            {
-                myAudio.clip = alert;
-                myAudio.PlayOneShot(alert, 1);
-                alreadyPlayed = true;
-            }
             
             if (delay <= 0)
             {
@@ -178,7 +164,7 @@ public class guardAI : MonoBehaviour {
         //Allowing for rotations.
         Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
         //Apply this to the transform itself. Time.delta time allows it to rotate slower, avoiding the weird glitchiness of it spazzing out basically
-         transform.rotation = Quaternion.RotateTowards(transform.rotation, q , 180 *Time.deltaTime); 
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, q , 180 *Time.deltaTime); 
 
         ///IMPORTANT!! Do not start a guard ON TOP of a patrol point, or else it will start spinning forever! Put it as far away as possible!!
 
@@ -195,8 +181,10 @@ public class guardAI : MonoBehaviour {
 
 
         if (timerStart == true)
-        
+        {
             timer -= Time.deltaTime;
+        }
+            
         
 
         if (speed > 0)
@@ -209,19 +197,37 @@ public class guardAI : MonoBehaviour {
 
     }
 
+    public void playAudio ()
+    {
+        if (speed > 0)
+        {
+            myAudio.PlayOneShot(walking, 1);
+        }
+
+        if (!alreadyPlayed)
+
+        {
+            myAudio.clip = alert;
+            myAudio.PlayOneShot(alert, 1);
+            alreadyPlayed = true;
+        }
+
+
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collisionInfo)
     {
         if (collisionInfo.gameObject.tag == "Player")
         {
-            
-         
             speed = 0;
-
         }
            
         //So that enemies can pass through each other
         if (collisionInfo.gameObject.tag == "enemy")
+        {
             Physics2D.IgnoreCollision(collisionInfo.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+            
     }
 }
