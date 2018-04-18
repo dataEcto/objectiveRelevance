@@ -24,24 +24,11 @@ public class lucySpotted : MonoBehaviour
     {
         if (GameObject.Find("Guard").GetComponent<fovScript>().spotted == true || spotted)
         {
-            /*
-            if(timer < 1)
-            {
-                timerOn
-            }
-            */
-            ///timer += Time.deltaTime / 0.5f;
+
             GetComponent<ParticleSystem>().Play();
-            //yPos = Mathf.Lerp(a, b, timer);
-            
-            //transform.position = new Vector3(transform.position.x, transform.position.y + yPos, transform.position.z);
+
         }
-        /*
-        else
-        {
-            timer = 0;
-        }
-        */
+       
     }
 
 }
