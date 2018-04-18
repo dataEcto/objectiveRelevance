@@ -345,7 +345,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4229146368967788, guid: 450b70fcfe835b842bd3e26eee8604f5, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4229146368967788, guid: 450b70fcfe835b842bd3e26eee8604f5, type: 2}
       propertyPath: m_LocalScale.y
@@ -379,6 +379,11 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 114288237714867054, guid: 3738fe1d7994bd74cb2939d9ad06addf,
+        type: 2}
+      propertyPath: patrolPoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114616353540484158, guid: 3738fe1d7994bd74cb2939d9ad06addf,
         type: 2}
       propertyPath: patrolPoints.Array.size
       value: 1
@@ -425,6 +430,33 @@ Prefab:
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4868928061503860, guid: 3738fe1d7994bd74cb2939d9ad06addf, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4868928061503860, guid: 3738fe1d7994bd74cb2939d9ad06addf, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.768
+      objectReference: {fileID: 0}
+    - target: {fileID: 4868928061503860, guid: 3738fe1d7994bd74cb2939d9ad06addf, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 212016631318666268, guid: 3738fe1d7994bd74cb2939d9ad06addf,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114616353540484158, guid: 3738fe1d7994bd74cb2939d9ad06addf,
+        type: 2}
+      propertyPath: speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114616353540484158, guid: 3738fe1d7994bd74cb2939d9ad06addf,
+        type: 2}
+      propertyPath: patrolPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1283720425}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3738fe1d7994bd74cb2939d9ad06addf, type: 2}
   m_IsPrefabParent: 0
@@ -596,7 +628,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &688851399
 GameObject:
@@ -670,7 +702,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4220196314769666, guid: 0940d17bfd6941843a7fd8ac5d596194, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 81120323633679128, guid: 0940d17bfd6941843a7fd8ac5d596194, type: 2}
@@ -681,6 +713,34 @@ Transform:
   m_PrefabParentObject: {fileID: 4229146368967788, guid: 450b70fcfe835b842bd3e26eee8604f5,
     type: 2}
   m_PrefabInternal: {fileID: 1735614900}
+--- !u!1 &1283720424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1283720425}
+  m_Layer: 0
+  m_Name: Patrol Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1283720425
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1283720424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.71, y: -0.586, z: -0.0009765625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1506096281 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4229146368967788, guid: 450b70fcfe835b842bd3e26eee8604f5,
@@ -1253,7 +1313,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4564664955964418, guid: bcd930217ebbfc442a4457322d56032f, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4564664955964418, guid: bcd930217ebbfc442a4457322d56032f, type: 2}
       propertyPath: m_LocalScale.x

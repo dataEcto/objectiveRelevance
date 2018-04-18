@@ -81,7 +81,7 @@ public class snakeMovement : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collisionInfo)
     {
         if (collisionInfo.gameObject.tag == "goal")
-            SceneManager.LoadScene("win");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
         if (collisionInfo.gameObject.tag == "enemy")
         {
@@ -90,7 +90,7 @@ public class snakeMovement : MonoBehaviour {
            
         if (collisionInfo.gameObject.tag == "tutorial end")
         {
-            SceneManager.LoadScene("textDebug");
+            SceneManager.LoadScene("introText");
         }
 
     }

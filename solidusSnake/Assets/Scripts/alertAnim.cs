@@ -17,9 +17,10 @@ public class alertAnim : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if (GameObject.Find("Guard").GetComponent<fovScript>().spotted == true)
         {
-            anim.SetBool("shouldPlay", true);
+            anim.SetBool("shouldPlay", true); //This never plays...
             playIdle = true;
 
             if (playIdle == true)

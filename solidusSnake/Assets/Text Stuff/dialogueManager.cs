@@ -12,7 +12,6 @@ public class dialogueManager : MonoBehaviour {
 
     public Animator animator;
 
-    float delay = 1;
     private Queue<string> sentences;
     //Think: John's Sylladex from Homestuck
 
@@ -65,7 +64,7 @@ public class dialogueManager : MonoBehaviour {
     {
       
         animator.SetBool("isOpen", false);
-        SceneManager.LoadScene("debug 1");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
   
