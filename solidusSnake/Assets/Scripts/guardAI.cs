@@ -44,12 +44,7 @@ public class guardAI : MonoBehaviour {
         currentPatrolIndex = 0;
         currentPatrolPoint = patrolPoints[currentPatrolIndex];
 
-        // playAudio();
 
-        if (speed > 0)
-        {
-            myAudio.Play();
-        }
     }
 	
 	void Update () {
@@ -159,7 +154,10 @@ public class guardAI : MonoBehaviour {
 
     public void playAudio ()
     {
-      
+        if (speed > 0)
+        {
+            myAudio.Play();
+        }
 
         if (!alreadyPlayed)
 
