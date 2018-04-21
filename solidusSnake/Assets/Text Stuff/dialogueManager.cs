@@ -12,13 +12,20 @@ public class dialogueManager : MonoBehaviour {
 
     public Animator animator;
 
+    public string levelOne;
+    public string levelTwo;
+    public string credits;
+    public string tutorial;
+
     private Queue<string> sentences;
     //Think: John's Sylladex from Homestuck
 
+    Scene scene;
 
     private void Awake()
     {
         sentences = new Queue<string>();
+        scene = SceneManager.GetActiveScene();
     }
 
     public void startDialogue(dialogue dialogue)
@@ -64,7 +71,26 @@ public class dialogueManager : MonoBehaviour {
     {
       
         animator.SetBool("isOpen", false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        if (scene.name == levelOne)
+        {
+            SceneManager.LoadScene("debug 1");
+        }
+
+        else if (scene.name == levelTwo)
+        {
+            SceneManager.LoadScene("debug 2");
+        }
+
+        else if (scene.name == credits)
+        {
+            SceneManager.LoadScene("win 2");
+        }
+
+        else
+        {
+            SceneManager.LoadScene("instructions");
+        }
     }
 
   

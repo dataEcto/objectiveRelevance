@@ -14,10 +14,12 @@ public class guardAI : MonoBehaviour {
     
 
     Animator anim;
-    public AudioClip alert;
-    public AudioClip walking;
     AudioSource myAudio;
-   
+    public AudioClip alert;
+
+    public string secondScene;
+    Scene scene;
+
 
     bool alreadyPlayed = true;
 
@@ -39,8 +41,9 @@ public class guardAI : MonoBehaviour {
 
         anim = transform.Find("GuardSprite").GetComponent<Animator>();
         myAudio = GetComponent<AudioSource>();
-        myAudio.clip = walking;
+        myAudio.clip = alert;
 
+      
         currentPatrolIndex = 0;
         currentPatrolPoint = patrolPoints[currentPatrolIndex];
 
@@ -49,8 +52,11 @@ public class guardAI : MonoBehaviour {
 	
 	void Update () {
 
-       
-       transform.Translate(Vector3.up * Time.deltaTime * speed);
+
+        scene = SceneManager.GetActiveScene();
+
+
+        transform.Translate(Vector3.up * Time.deltaTime * speed);
 
        
         //Check to see if the enemy is aware of the player - else, just patrol.
@@ -58,7 +64,7 @@ public class guardAI : MonoBehaviour {
         {
             //The Patrol part
             Patrol();
-            
+           
 
         }
 
@@ -67,7 +73,7 @@ public class guardAI : MonoBehaviour {
            
             timer = 0;
             speed = 0;
-
+            playAudio();
             delay -= Time.deltaTime;
 
             GameObject.Find("Snake").GetComponent<snakeMovement>().canMove = false;
@@ -76,6 +82,13 @@ public class guardAI : MonoBehaviour {
             if (delay <= 0)
             {
                 SceneManager.LoadScene("gameOver");
+            
+                if (scene.name == secondScene)
+                {
+                    Debug.Log("Loading the 2nd game over");
+                    SceneManager.LoadScene("gameOver 2");
+                }
+                    
             }
 
 
@@ -154,10 +167,7 @@ public class guardAI : MonoBehaviour {
 
     public void playAudio ()
     {
-        if (speed > 0)
-        {
-            myAudio.Play();
-        }
+ 
 
         if (!alreadyPlayed)
 
