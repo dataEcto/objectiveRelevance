@@ -2181,6 +2181,10 @@ Prefab:
       propertyPath: patrolPoints.Array.data[3]
       value: 
       objectReference: {fileID: 581770446}
+    - target: {fileID: 1497209273686732, guid: 3738fe1d7994bd74cb2939d9ad06addf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3738fe1d7994bd74cb2939d9ad06addf, type: 2}
   m_IsPrefabParent: 0
