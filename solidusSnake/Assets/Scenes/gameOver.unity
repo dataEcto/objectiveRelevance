@@ -383,7 +383,9 @@ Prefab:
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.data[1]
-      value: That's weird. This was suppose to be an easy level.
+      value: 'That''s weird. These are
+
+        suppose to be easy.'
       objectReference: {fileID: 0}
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}

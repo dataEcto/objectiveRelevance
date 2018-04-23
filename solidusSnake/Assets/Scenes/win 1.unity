@@ -434,9 +434,11 @@ Prefab:
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.data[6]
-      value: '
+      value: '....I guess this is game over.
 
-'
+        Thank you for your time....
+
+        Lucy.'
       objectReference: {fileID: 0}
     - target: {fileID: 114786241038877426, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}

@@ -12,6 +12,7 @@ public class dialogueManager : MonoBehaviour {
 
     public Animator animator;
 
+    public string start;
     public string levelOne;
     public string levelTwo;
     public string credits;
@@ -72,7 +73,7 @@ public class dialogueManager : MonoBehaviour {
       
         animator.SetBool("isOpen", false);
 
-        if (scene.name == levelOne)
+        if (scene.name == levelOne || scene.name == start)
         {
             SceneManager.LoadScene("debug 1");
         }
@@ -86,6 +87,8 @@ public class dialogueManager : MonoBehaviour {
         {
             SceneManager.LoadScene("win 2");
         }
+
+   
 
         else
         {

@@ -378,22 +378,22 @@ Prefab:
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.data[0]
-      value: The second one.
+      value: Oh, so close.
       objectReference: {fileID: 0}
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.data[1]
-      value: That's weird. This was suppose to be an easy level.
+      value: Maybe I made it too hard for you.
       objectReference: {fileID: 0}
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.data[2]
-      value: '...Oh well, Just give it another go then.'
+      value: You sure you wanna go agin?
       objectReference: {fileID: 0}
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
       propertyPath: dialogue.sentences.Array.data[3]
-      value: (Jeez...How is that even possible...)
+      value: If you say so.
       objectReference: {fileID: 0}
     - target: {fileID: 114902869390223262, guid: 25f6cc28857e48943a9835817e3e0293,
         type: 2}
